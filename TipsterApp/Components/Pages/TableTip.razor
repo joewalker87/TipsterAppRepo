@@ -1,0 +1,176 @@
+﻿@using TipsterApp.Data
+@inject ITipStorage TipStorage
+@page "/tabletip"
+
+<h3>Spropitné</h3>
+
+@if (highestTip != null)
+{
+    <div style="background: #e0ffe0; padding: 8px; margin-bottom: 12px;">
+        <strong>Nejvyšší tip dne:</strong>
+        @highestTip.TipAmount Kč (@highestTip.TipPercent %)
+        – @highestTip.Inserted.ToString("g")
+        @if (!string.IsNullOrEmpty(highestTip.Email))
+        {
+            <span style="font-size:smaller;">(@highestTip.Email)</span>
+        }
+    </div>
+}
+
+@if (model.BillAmount > 0 && model.TipAmount > 0)
+{
+    <div style="background: #e0eaff; padding: 8px; margin-bottom: 12px;">
+        <strong>Celková částka k úhradě (účet + tip):</strong>
+        @(model.BillAmount + model.TipAmount) Kč
+    </div>
+}
+
+<div>
+    <label>Zadej číslo stolu pro úpravu:</label>
+    <InputNumber @bind-Value="searchTableId" />
+    <button @onclick="LoadTip">Načíst</button>
+</div>
+
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit" FormName="tableTipForm1">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Číslo stolu:</label>
+        <InputNumber @bind-Value="model.TableId" />
+        <ValidationMessage For="@(() => model.TableId)" />
+    </div>
+    <div>
+        <label>Účet (částka):</label>
+        <InputNumber @bind-Value="model.BillAmount" />
+        Kč
+        <ValidationMessage For="@(() => model.BillAmount)" />
+    </div>
+    <div>
+        <label>Spropitné:</label>
+        <button type="button" @onclick="() => SetTipPercent(2)">2 %</button>
+        <button type="button" @onclick="() => SetTipPercent(5)">5 %</button>
+        <button type="button" @onclick="() => SetTipPercent(10)">10 %</button>
+        <button type="button" @onclick="() => SetTipPercent(20)">20 %</button>
+        <button type="button" @onclick="() => SetTipPercent(30)">30 %</button>
+        <input type="number" @bind-value="customTip" @oninput="OnCustomTipChanged" placeholder="Vlastní částka" /> Kč
+        <ValidationMessage For="@(() => model.TipAmount)" />
+    </div>
+    <div>
+        <label>Email:</label>
+        <InputText @bind-Value="model.Email" />
+        <ValidationMessage For="@(() => model.Email)" />
+    </div>
+    <div>
+        <label>Hodnocení (1–5):</label>
+        <InputNumber @bind-Value="model.Rating" Min="1" Max="5" />
+        <ValidationMessage For="@(() => model.Rating)" />
+    </div>
+    <button type="submit">Odeslat</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(infoMsg))
+{
+    <div style="color: green;">@infoMsg</div>
+}
+
+@code {
+    TipRecord model = new TipRecord();
+    int selectedTipPercent;
+    decimal customTip;
+    int searchTableId;
+    string infoMsg = "";
+
+    TipRecord? highestTip;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadHighestTip();
+    }
+
+    async Task LoadHighestTip()
+    {
+        var tips = await TipStorage.GetAllAsync();
+        highestTip = tips.OrderByDescending(t => t.TipAmount).FirstOrDefault();
+    }
+
+    async Task LoadTip()
+    {
+        var tips = await TipStorage.GetAllAsync();
+        var found = tips.FirstOrDefault(t => t.TableId == searchTableId);
+
+        if (found != null)
+        {
+            model = new TipRecord
+            {
+                TableId = found.TableId,
+                BillAmount = found.BillAmount,
+                TipAmount = found.TipAmount,
+                TipPercent = found.TipPercent,
+                Email = found.Email,
+                Rating = found.Rating,
+                Inserted = found.Inserted,
+                Updated = found.Updated,
+                IsActive = found.IsActive
+            };
+            selectedTipPercent = found.TipPercent;
+            customTip = found.TipPercent == 0 ? found.TipAmount : 0;
+            infoMsg = "Záznam načten, můžeš upravit a uložit.";
+        }
+        else
+        {
+            model = new TipRecord { TableId = searchTableId };
+            selectedTipPercent = 0;
+            customTip = 0;
+            infoMsg = "Pro tento stůl zatím žádný záznam není, můžeš zadat nový.";
+        }
+        await LoadHighestTip();
+    }
+
+    void SetTipPercent(int percent)
+    {
+        selectedTipPercent = percent;
+        customTip = 0;
+        if (model.BillAmount > 0)
+        {
+            model.TipAmount = Math.Round(model.BillAmount * percent / 100, 2);
+            model.TipPercent = percent;
+        }
+        else
+        {
+            model.TipAmount = 0;
+            model.TipPercent = percent;
+        }
+    }
+
+    void OnCustomTipChanged(ChangeEventArgs e)
+    {
+        if (decimal.TryParse(e.Value?.ToString(), out var value))
+        {
+            customTip = value;
+            if (customTip > 0)
+            {
+                model.TipAmount = customTip;
+                model.TipPercent = 0;
+                selectedTipPercent = 0;
+            }
+        }
+        else
+        {
+            customTip = 0;
+            model.TipAmount = 0;
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        model.Inserted = model.Inserted == default ? DateTime.Now : model.Inserted;
+        model.Updated = DateTime.Now;
+        model.IsActive = true;
+
+        await TipStorage.AddOrUpdateAsync(model);
+        infoMsg = "Záznam uložen.";
+
+        await LoadHighestTip();
+    }
+}

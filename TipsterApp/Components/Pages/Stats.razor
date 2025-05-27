@@ -1,0 +1,29 @@
+﻿@using TipsterApp.Data
+@using TipsterApp.Services
+@inject StatsBackgroundService StatsService
+@page "/stats"
+
+<h3>Statistiky</h3>
+
+@if (StatsService.Stats.HighestTip != null)
+{
+    <div>
+        <strong>Celková částka všech tipů:</strong> @StatsService.Stats.TotalTips Kč
+    </div>
+    <div>
+        <strong>Nejvyšší tip dne:</strong>
+        <span>
+            @StatsService.Stats.HighestTip.TipAmount Kč (@StatsService.Stats.HighestTip.TipPercent %) - @StatsService.Stats.HighestTip.Inserted.ToString("g")
+        </span>
+    </div>
+    <div>
+        <strong>Průměrné procento spropitného:</strong> @StatsService.Stats.AvgPercent:F2 %
+    </div>
+    <div>
+        <strong>Průměrné hodnocení:</strong> @StatsService.Stats.AvgRating:F2
+    </div>
+}
+else
+{
+    <div>Žádná data zatím nejsou.</div>
+}

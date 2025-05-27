@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "TipsterApp.Controllers.TipsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Tips",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

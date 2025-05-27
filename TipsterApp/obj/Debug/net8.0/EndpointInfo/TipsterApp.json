@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "TipsterApp",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Tips": {
+      "get": {
+        "tags": [
+          "Tips"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Zadej 'Bearer <token>' do pole níže.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
