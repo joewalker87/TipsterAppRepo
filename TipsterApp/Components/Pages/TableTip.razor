@@ -60,7 +60,7 @@
                 <div style="display: flex; align-items: center; gap: 4px;">
                     @if (selectedTipPercent > 0)
                     {
-                        <input type="number" value="@model.TipAmount" readonly class="tip-input-small" style="background:#e0ffe0;" />
+                        <InputNumber @bind-Value="model.TipAmount" readonly class="tip-input-small" style="background:#e0ffe0;" />
                     }
                     else
                     {
@@ -274,37 +274,36 @@
     void SetTipPercent(int percent)
     {
         selectedTipPercent = percent;
-        customTip = 0;
-        if (model.BillAmount > 0)
+        if (percent > 0 && model.BillAmount > 0)
         {
             model.TipAmount = Math.Round(model.BillAmount * percent / 100, 2);
             model.TipPercent = percent;
+            customTip = model.TipAmount; // Důležité pro synchronizaci inputu!
         }
         else
         {
             model.TipAmount = 0;
-            model.TipPercent = percent;
+            model.TipPercent = 0;
+            customTip = 0;
         }
         StateHasChanged();
     }
+
 
     void OnCustomTipChanged(ChangeEventArgs e)
     {
         if (decimal.TryParse(e.Value?.ToString(), out var value))
         {
             customTip = value;
-            if (customTip > 0)
+            model.TipAmount = customTip;
+            selectedTipPercent = 0;
+            if (model.BillAmount > 0)
             {
-                model.TipAmount = customTip;
-                selectedTipPercent = 0;
-                if (model.BillAmount > 0)
-                {
-                    model.TipPercent = (int)Math.Round(100 * model.TipAmount / model.BillAmount);
-                }
-                else
-                {
-                    model.TipPercent = 0;
-                }
+                model.TipPercent = (int)Math.Round(100 * model.TipAmount / model.BillAmount);
+            }
+            else
+            {
+                model.TipPercent = 0;
             }
         }
         else
@@ -334,6 +333,12 @@
         selectedTipPercent = 0;
         customTip = 0;
         infoMsg = "";
+    }
+
+    protected override void OnInitialized()
+    {
+        var rnd = new Random();
+        model.BillAmount = rnd.Next(60, 300);
     }
 
 }
