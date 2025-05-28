@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TipsterApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0865400cf363458be165322c4e73e51752ddda5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc4807f98f7231f5d8e82f5b411597c4074423b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TipsterApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TipsterApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

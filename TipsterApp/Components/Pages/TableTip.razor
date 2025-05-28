@@ -81,6 +81,7 @@
             <ValidationMessage For="@(() => model.Rating)" />
         </div>
         <button type="submit" class="tip-btn-submit">Odeslat 🎯</button>
+        <button type="button" class="tip-btn-submit" @onclick="ResetForm">Zadat nový záznam</button>
     </EditForm>
 
     @if (!string.IsNullOrEmpty(infoMsg))
@@ -202,6 +203,18 @@
         .tip-btn-submit:hover {
             background: #d6006e;
         }
+
+    <style >
+    .tip-btn-reset {
+        background: #0080ff;
+        color: white;
+        border-radius: 8px;
+        padding: 8px 16px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+</style>
+
 </style>
 
 @code {
@@ -313,4 +326,13 @@
 
         await LoadHighestTip();
     }
+
+    void ResetForm()
+    {
+        model = new TipRecord();
+        selectedTipPercent = 0;
+        customTip = 0;
+        infoMsg = "";
+    }
+
 }
