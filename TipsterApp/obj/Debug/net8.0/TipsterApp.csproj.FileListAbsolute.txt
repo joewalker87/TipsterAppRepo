@@ -35,8 +35,8 @@ C:\Users\josef.prochazka\OneDrive\GitHub\TipsterApp\obj\Debug\net8.0\TipsterApp.
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterApp\obj\Debug\net8.0\ref\TipsterApp.dll
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\appsettings.json
-C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.staticwebassets.endpoints.json
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.staticwebassets.runtime.json
+C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.staticwebassets.endpoints.json
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.exe
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.deps.json
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\TipsterApp.runtimeconfig.json
