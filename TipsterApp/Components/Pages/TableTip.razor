@@ -39,12 +39,12 @@
 
         <div class="tip-input-row">
             <label>Číslo stolu:</label>
-            <InputNumber @bind-Value="model.TableId" class="tip-input-small" />
+            <InputNumber @bind-Value="model.TableId" class="tip-input-small" Min="1" required />
             <ValidationMessage For="@(() => model.TableId)" />
         </div>
         <div class="tip-input-row">
             <label>Účet (částka):</label>
-            <InputNumber @bind-Value="model.BillAmount" class="tip-input-small" />
+            <InputNumber @bind-Value="model.BillAmount" class="tip-input-small" Min="0.01" step="0.01" required />
             <span> Kč</span>
             <ValidationMessage For="@(() => model.BillAmount)" />
         </div>
@@ -56,6 +56,7 @@
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(10)">10 %</button>
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(20)">20 %</button>
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(30)">30 %</button>
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(0)">Vlastní částka</button>
                 <div style="display: flex; align-items: center; gap: 4px;">
                     @if (selectedTipPercent > 0)
                     {
@@ -72,16 +73,16 @@
         </div>
         <div class="tip-input-row">
             <label>Email:</label>
-            <InputText @bind-Value="model.Email" class="tip-input-medium" />
+            <InputText @bind-Value="model.Email" type="email" required class="tip-input-medium" />
             <ValidationMessage For="@(() => model.Email)" />
         </div>
         <div class="tip-input-row">
             <label>Hodnocení (1–5):</label>
-            <InputNumber @bind-Value="model.Rating" Min="1" Max="5" class="tip-input-small" />
+            <InputNumber @bind-Value="model.Rating" Min="1" Max="5" required class="tip-input-small" />
             <ValidationMessage For="@(() => model.Rating)" />
         </div>
         <button type="submit" class="tip-btn-submit">Odeslat 🎯</button>
-        <button type="button" class="tip-btn-submit" @onclick="ResetForm">Zadat nový záznam</button>
+        <button type="button" class="tip-btn-submit" style="margin-left: 10px;" @onclick="ResetForm">Zadat nový záznam</button>
     </EditForm>
 
     @if (!string.IsNullOrEmpty(infoMsg))
