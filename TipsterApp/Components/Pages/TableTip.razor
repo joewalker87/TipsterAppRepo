@@ -278,7 +278,7 @@
         {
             model.TipAmount = Math.Round(model.BillAmount * percent / 100, 2);
             model.TipPercent = percent;
-            customTip = model.TipAmount; // Důležité pro synchronizaci inputu!
+            customTip = model.TipAmount;
         }
         else
         {
@@ -333,6 +333,9 @@
         selectedTipPercent = 0;
         customTip = 0;
         infoMsg = "";
+
+        var rnd = new Random();
+        model.BillAmount = rnd.Next(60, 300);
     }
 
     protected override void OnInitialized()
