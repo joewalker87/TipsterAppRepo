@@ -274,25 +274,6 @@
         StateHasChanged();
     }
 
-    // void OnCustomTipChanged(ChangeEventArgs e)
-    // {
-    //     if (decimal.TryParse(e.Value?.ToString(), out var value))
-    //     {
-    //         customTip = value;
-    //         if (customTip > 0)
-    //         {
-    //             model.TipAmount = customTip;
-    //             model.TipPercent = 0;
-    //             selectedTipPercent = 0;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         customTip = 0;
-    //         model.TipAmount = 0;
-    //     }
-    // }
-
     void OnCustomTipChanged(ChangeEventArgs e)
     {
         if (decimal.TryParse(e.Value?.ToString(), out var value))
