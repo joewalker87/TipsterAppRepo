@@ -56,7 +56,17 @@
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(10)">10 %</button>
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(20)">20 %</button>
                 <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(30)">30 %</button>
-                <input type="number" @bind-value="customTip" @oninput="OnCustomTipChanged" placeholder="Vlastní částka" class="tip-input-small" /> Kč
+                <div style="display: flex; align-items: center; gap: 4px;">
+                    @if (selectedTipPercent > 0)
+                    {
+                        <input type="number" value="@model.TipAmount" readonly class="tip-input-small" style="background:#e0ffe0;" />
+                    }
+                    else
+                    {
+                        <input type="number" @bind-value="customTip" @oninput="OnCustomTipChanged" min="0.01" step="0.01" placeholder="Vlastní částka" class="tip-input-small" />
+                    }
+                    <span>Kč</span>
+                </div>
             </div>
             <ValidationMessage For="@(() => model.TipAmount)" />
         </div>
@@ -261,7 +271,27 @@
             model.TipAmount = 0;
             model.TipPercent = percent;
         }
+        StateHasChanged();
     }
+
+    // void OnCustomTipChanged(ChangeEventArgs e)
+    // {
+    //     if (decimal.TryParse(e.Value?.ToString(), out var value))
+    //     {
+    //         customTip = value;
+    //         if (customTip > 0)
+    //         {
+    //             model.TipAmount = customTip;
+    //             model.TipPercent = 0;
+    //             selectedTipPercent = 0;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         customTip = 0;
+    //         model.TipAmount = 0;
+    //     }
+    // }
 
     void OnCustomTipChanged(ChangeEventArgs e)
     {
@@ -271,16 +301,25 @@
             if (customTip > 0)
             {
                 model.TipAmount = customTip;
-                model.TipPercent = 0;
                 selectedTipPercent = 0;
+                if (model.BillAmount > 0)
+                {
+                    model.TipPercent = (int)Math.Round(100 * model.TipAmount / model.BillAmount);
+                }
+                else
+                {
+                    model.TipPercent = 0;
+                }
             }
         }
         else
         {
             customTip = 0;
             model.TipAmount = 0;
+            model.TipPercent = 0;
         }
     }
+
 
     private async Task HandleValidSubmit()
     {
