@@ -1,78 +1,198 @@
-﻿@using TipsterApp.Data
+﻿@rendermode InteractiveServer
+@using TipsterApp.Data
 @inject ITipStorage TipStorage
 @page "/tabletip"
 
-<h3>Spropitné</h3>
+<div class="tip-mainbox">
+    <h2 class="tip-title">💸 Spropitné v kavárně ☕</h2>
 
-@if (highestTip != null)
-{
-    <div style="background: #e0ffe0; padding: 8px; margin-bottom: 12px;">
-        <strong>Nejvyšší tip dne:</strong>
-        @highestTip.TipAmount Kč (@highestTip.TipPercent %)
-        – @highestTip.Inserted.ToString("g")
-        @if (!string.IsNullOrEmpty(highestTip.Email))
-        {
-            <span style="font-size:smaller;">(@highestTip.Email)</span>
-        }
+    @if (highestTip != null)
+    {
+        <div class="tip-info-box">
+            <strong>Nejvyšší tip dne:</strong>
+            @highestTip.TipAmount Kč (@highestTip.TipPercent %)
+            – @highestTip.Inserted.ToString("g")
+            @if (!string.IsNullOrEmpty(highestTip.Email))
+            {
+                <span style="font-size:smaller;">(@highestTip.Email)</span>
+            }
+        </div>
+    }
+
+    @if (model.BillAmount > 0 && model.TipAmount > 0)
+    {
+        <div class="tip-info-box tip-info-blue">
+            <strong>Celková částka k úhradě (účet + tip):</strong>
+            @(model.BillAmount + model.TipAmount) Kč
+        </div>
+    }
+
+    <div class="tip-edit-box">
+        <label>Zadej číslo stolu pro úpravu:</label>
+        <InputNumber @bind-Value="searchTableId" class="tip-input-small" />
+        <button class="tip-btn" @onclick="LoadTip">Načíst</button>
     </div>
-}
 
-@if (model.BillAmount > 0 && model.TipAmount > 0)
-{
-    <div style="background: #e0eaff; padding: 8px; margin-bottom: 12px;">
-        <strong>Celková částka k úhradě (účet + tip):</strong>
-        @(model.BillAmount + model.TipAmount) Kč
-    </div>
-}
+    <EditForm Model="@model" OnValidSubmit="HandleValidSubmit" FormName="tableTipForm1">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-<div>
-    <label>Zadej číslo stolu pro úpravu:</label>
-    <InputNumber @bind-Value="searchTableId" />
-    <button @onclick="LoadTip">Načíst</button>
+        <div class="tip-input-row">
+            <label>Číslo stolu:</label>
+            <InputNumber @bind-Value="model.TableId" class="tip-input-small" />
+            <ValidationMessage For="@(() => model.TableId)" />
+        </div>
+        <div class="tip-input-row">
+            <label>Účet (částka):</label>
+            <InputNumber @bind-Value="model.BillAmount" class="tip-input-small" />
+            <span> Kč</span>
+            <ValidationMessage For="@(() => model.BillAmount)" />
+        </div>
+        <div class="tip-input-row">
+            <label>Spropitné:</label>
+            <div class="tip-btn-group">
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(2)">2 %</button>
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(5)">5 %</button>
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(10)">10 %</button>
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(20)">20 %</button>
+                <button type="button" class="tip-btn tip-btn-percent" @onclick="() => SetTipPercent(30)">30 %</button>
+                <input type="number" @bind-value="customTip" @oninput="OnCustomTipChanged" placeholder="Vlastní částka" class="tip-input-small" /> Kč
+            </div>
+            <ValidationMessage For="@(() => model.TipAmount)" />
+        </div>
+        <div class="tip-input-row">
+            <label>Email:</label>
+            <InputText @bind-Value="model.Email" class="tip-input-medium" />
+            <ValidationMessage For="@(() => model.Email)" />
+        </div>
+        <div class="tip-input-row">
+            <label>Hodnocení (1–5):</label>
+            <InputNumber @bind-Value="model.Rating" Min="1" Max="5" class="tip-input-small" />
+            <ValidationMessage For="@(() => model.Rating)" />
+        </div>
+        <button type="submit" class="tip-btn-submit">Odeslat 🎯</button>
+    </EditForm>
+
+    @if (!string.IsNullOrEmpty(infoMsg))
+    {
+        <div class="tip-info-green">@infoMsg</div>
+    }
 </div>
 
-<EditForm Model="@model" OnValidSubmit="HandleValidSubmit" FormName="tableTipForm1">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<style>
+    .tip-mainbox {
+        background: #fffbe7;
+        border-radius: 18px;
+        padding: 32px 24px 24px 24px;
+        max-width: 540px;
+        margin: 30px auto 0 auto;
+        box-shadow: 0 4px 16px #e3e3e3;
+    }
 
-    <div>
-        <label>Číslo stolu:</label>
-        <InputNumber @bind-Value="model.TableId" />
-        <ValidationMessage For="@(() => model.TableId)" />
-    </div>
-    <div>
-        <label>Účet (částka):</label>
-        <InputNumber @bind-Value="model.BillAmount" />
-        Kč
-        <ValidationMessage For="@(() => model.BillAmount)" />
-    </div>
-    <div>
-        <label>Spropitné:</label>
-        <button type="button" @onclick="() => SetTipPercent(2)">2 %</button>
-        <button type="button" @onclick="() => SetTipPercent(5)">5 %</button>
-        <button type="button" @onclick="() => SetTipPercent(10)">10 %</button>
-        <button type="button" @onclick="() => SetTipPercent(20)">20 %</button>
-        <button type="button" @onclick="() => SetTipPercent(30)">30 %</button>
-        <input type="number" @bind-value="customTip" @oninput="OnCustomTipChanged" placeholder="Vlastní částka" /> Kč
-        <ValidationMessage For="@(() => model.TipAmount)" />
-    </div>
-    <div>
-        <label>Email:</label>
-        <InputText @bind-Value="model.Email" />
-        <ValidationMessage For="@(() => model.Email)" />
-    </div>
-    <div>
-        <label>Hodnocení (1–5):</label>
-        <InputNumber @bind-Value="model.Rating" Min="1" Max="5" />
-        <ValidationMessage For="@(() => model.Rating)" />
-    </div>
-    <button type="submit">Odeslat</button>
-</EditForm>
+    .tip-title {
+        color: #ff0080;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px #ffe0f0;
+    }
 
-@if (!string.IsNullOrEmpty(infoMsg))
-{
-    <div style="color: green;">@infoMsg</div>
-}
+    .tip-info-box {
+        background: #e0ffe0;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-bottom: 12px;
+        font-size: 1.08rem;
+    }
+
+    .tip-info-blue {
+        background: #e0eaff;
+    }
+
+    .tip-info-green {
+        margin-top: 18px;
+        padding: 10px 18px;
+        background: #e0ffe0;
+        color: #008000;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .tip-edit-box {
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tip-input-row {
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tip-btn-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .tip-input-small {
+        width: 60px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+        padding: 3px 6px;
+    }
+
+    .tip-input-medium {
+        width: 180px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+        padding: 3px 6px;
+    }
+
+    .tip-btn {
+        background: #ffe0f0;
+        color: #ff0080;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+        .tip-btn:hover {
+            background: #ffb3d1;
+        }
+
+    .tip-btn-percent {
+        min-width: 48px;
+    }
+
+    .tip-btn-submit {
+        background: #ff0080;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-top: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #ffd6e6;
+        transition: background 0.2s;
+    }
+
+        .tip-btn-submit:hover {
+            background: #d6006e;
+        }
+</style>
 
 @code {
     TipRecord model = new TipRecord();

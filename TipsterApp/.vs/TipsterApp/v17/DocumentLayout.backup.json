@@ -1,7 +1,16 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F55246AC-3105-43D8-A3CD-255B1D3E455D}|TipsterApp.csproj|c:\\users\\josef.prochazka\\onedrive\\github\\tipsterapprepo\\tipsterapp\\components\\pages\\stats.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F55246AC-3105-43D8-A3CD-255B1D3E455D}|TipsterApp.csproj|solutionrelative:components\\pages\\stats.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F55246AC-3105-43D8-A3CD-255B1D3E455D}|TipsterApp.csproj|c:\\users\\josef.prochazka\\onedrive\\github\\tipsterapprepo\\tipsterapp\\components\\pages\\tabletip.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F55246AC-3105-43D8-A3CD-255B1D3E455D}|TipsterApp.csproj|solutionrelative:components\\pages\\tabletip.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,38 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TableTip.razor",
+              "DocumentMoniker": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\Components\\Pages\\TableTip.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\TableTip.razor",
+              "ToolTip": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\Components\\Pages\\TableTip.razor",
+              "RelativeToolTip": "Components\\Pages\\TableTip.razor",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAAwCgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-28T06:29:21.073Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Stats.razor",
+              "DocumentMoniker": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\Components\\Pages\\Stats.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Stats.razor",
+              "ToolTip": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\Components\\Pages\\Stats.razor*",
+              "RelativeToolTip": "Components\\Pages\\Stats.razor*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-28T07:39:19.889Z",
+              "EditorCaption": ""
             }
           ]
         }

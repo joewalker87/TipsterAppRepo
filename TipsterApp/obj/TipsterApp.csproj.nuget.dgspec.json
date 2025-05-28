@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\TipsterApp.csproj": {}
+    "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\TipsterApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\TipsterApp.csproj": {
+    "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\TipsterApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\TipsterApp.csproj",
+        "projectUniqueName": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\TipsterApp.csproj",
         "projectName": "TipsterApp",
-        "projectPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\TipsterApp.csproj",
+        "projectPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\TipsterApp.csproj",
         "packagesPath": "C:\\Users\\josef.prochazka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\obj\\",
+        "outputPath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

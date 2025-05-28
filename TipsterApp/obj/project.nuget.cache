@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zscF5cNBZF4=",
+  "dgSpecHash": "3udbziOzKQ8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp\\TipsterApp.csproj",
+  "projectFilePath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp\\TipsterApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josef.prochazka\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\josef.prochazka\\.nuget\\packages\\microsoft.openapi\\1.6.23\\microsoft.openapi.1.6.23.nupkg.sha512",

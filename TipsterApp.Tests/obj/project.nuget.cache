@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NQq2vlFlGYA=",
+  "dgSpecHash": "AFfr6GZpWqU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterApp.Tests\\TipsterApp.Tests.csproj",
+  "projectFilePath": "C:\\Users\\josef.prochazka\\OneDrive\\GitHub\\TipsterAppRepo\\TipsterApp.Tests\\TipsterApp.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josef.prochazka\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\josef.prochazka\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
