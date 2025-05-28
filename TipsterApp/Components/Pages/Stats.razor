@@ -9,11 +9,11 @@
     @if (StatsService.Stats.HighestTip != null)
     {
         <div class="stats-row">
-            <strong>Celková částka všech tipů:</strong>
+            <strong>Celková částka všech spropitných:</strong>
             <span class="stats-value">@StatsService.Stats.TotalTips Kč</span>
         </div>
         <div class="stats-row">
-            <strong>Nejvyšší tip dne:</strong>
+            <strong>Nejvyšší spropitné dne:</strong>
             <span class="stats-value">
                 @StatsService.Stats.HighestTip.TipAmount Kč (@StatsService.Stats.HighestTip.TipPercent %)
                 – @StatsService.Stats.HighestTip.Inserted.ToString("g")

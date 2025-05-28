@@ -69,3 +69,4 @@ C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\obj\Debug\net
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\obj\Debug\net8.0\TipsterApp.pdb
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\obj\Debug\net8.0\TipsterApp.genruntimeconfig.cache
 C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\obj\Debug\net8.0\ref\TipsterApp.dll
+C:\Users\josef.prochazka\OneDrive\GitHub\TipsterAppRepo\TipsterApp\bin\Debug\net8.0\tips.json
