@@ -1,72 +1,43 @@
 # TipsterApp
-Aplikace pro správu a zadávání spropitného v kavárně.  
-Umožňuje zadávat spropitné ke stolu, sledovat statistiky, validovat vstupy, exportovat data přes REST API a vše běží na moderním Blazoru (.NET 8).
+
+A tip and feedback tracking app for cafés.  
+Users can submit or update a tip for their table, rate the service, and view live statistics. Built with modern Blazor (.NET 8), featuring REST API, background services, and flexible data storage.
 
 ---
 
-## Funkce
+## Features
 
-- Zadávání a úprava spropitného u stolu (Table ID)
-- Výběr spropitného (procenta nebo vlastní částka)
-- Validace vstupů (email, hodnocení, částky)
-- Zobrazení nejvyššího spropitného dne a celkové částky
-- Statistiky: celková částka, nejvyšší spropitné, průměrné procento, průměrné hodnocení
-- REST API pro export dat (dokumentace přes Swagger, zabezpečeno tokenem)
-- Přepínání úložiště (InMemory/JSON)
-- Background service pro výpočet statistik
-
----
-
-## Jak spustit aplikaci
-
-1. **Otevři solution ve Visual Studiu**
-   - Soubor `TipsterApp.sln`
-   - Stiskni F5 nebo spusť projekt `TipsterApp`
+- Add or update tip for a specific **Table ID**
+- Choose from predefined tip percentages or enter a **custom amount**
+- **Input validation** (email, rating, amounts)
+- Show **highest tip of the day** and **total cost**
+- **Statistics page**:
+  - Total amount of tips
+  - Highest tip of the day (with percent and timestamp)
+  - Average tip percentage
+  - Average rating
+- **REST API** with Swagger docs (secured with Bearer token)
+- **Pluggable storage** – in-memory or JSON file (configurable)
+- **Background service** to refresh statistics every 10 seconds
 
 ---
 
-## Přepnutí úložiště
+## How to run the app
 
-V konfiguračním souboru (`appsettings.json`) nastav typ úložiště:
-- `InMemory` – data jen v paměti
-- `Json` – data se ukládají do souboru (umístění souboru: TipsterApp\tips.json)
-
----
-
-## REST API a dokumentace
-
-- Otevři **Swagger UI** v prohlížeči po spuštění aplikace (typicky na `https://localhost:{port}/swagger`)
-- Zobrazí se popis všech dostupných endpointů a možnost jejich otestování
-- API je chráněné tokenem – použij tlačítko **"Authorize"**
-- Autorizační token, který je třeba zadat do pole "Value" ve formuláři "Available authorizations" je: Bearer tokenValue
+1. Open `TipsterApp.sln` in Visual Studio
+2. Press **F5** or start the `TipsterApp` project manually
 
 ---
 
-## Testování
+## Switch storage type
 
-- Projekt obsahuje jednoduchý unit test v projektu `TipsterApp.Tests`
-- Test najdeš ve třídě `TipStorageTests.cs`
-- Ověřuje, že po uložení tipu lze záznam správně načíst:
-  - počet záznamů je 1
-  - ID stolu a výše spropitného odpovídají
+Edit the `appsettings.json` and set the following:
 
----
+```json
+"StorageType": "InMemory"
 
-## Použité technologie
-
-- .NET 8, Blazor Web App
-- C#
-- REST API (Swagger/OpenAPI)
-- Background Service
-- Bootstrap/CSS
-
----
 
 ## Autor
 
 Josef Procházka  
 prochazka@email.cz
-
----
-
-*Good luck and, most importantly, have fun!*
